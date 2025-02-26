@@ -5,6 +5,7 @@ on:
     branches:
       - main
       - master
+      - workflow1
 jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
