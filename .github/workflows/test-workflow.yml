@@ -36,13 +36,15 @@ jobs:
       - name: Run Tests with Coverage
         run: go test -v -coverprofile=coverage.out ./...
 
-      - name: Upload Coverage Report
-        uses: codecov/codecov-action@v4
-        with:
-          file: coverage.out
-          flags: unittests
-          name: go-code-coverage
-          fail_ci_if_error: true
+      # - name: Upload Coverage Report
+      #   uses: codecov/codecov-action@v4
+      #   with:
+      #     file: coverage.out
+      #     flags: unittests
+      #     name: go-code-coverage
+      #     fail_ci_if_error: true
+      #   env:
+      #     CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
   security-check:
     name: Security Scan
