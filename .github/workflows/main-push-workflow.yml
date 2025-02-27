@@ -1,13 +1,9 @@
 name: Relay Service - Basic Repo Check
 
 on:
-  pull_request:
-    branches:
-      - main
   push:
     branches:
-      - "**"
-      - "!main"
+      - "main"
 
 jobs:
   build-test:
@@ -66,3 +62,30 @@ jobs:
 
       - name: Run Vulnerability Scan
         run: govulncheck ./...
+
+  deploy-k8s:
+    name: Deploy to Kubernetes
+    runs-on: ubuntu-latest
+    needs: [security-check]
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Kubectl
+        uses: azure/setup-kubectl@v3
+        with:
+          version: "latest"
+
+      - name: Configure Kubernetes Context
+        run: |
+          echo "${{ secrets.KUBECONFIG }}" | base64 --decode > kubeconfig.yaml
+          export KUBECONFIG=kubeconfig.yaml
+
+      - name: Deploy to Kubernetes
+        run: |
+          kubectl apply -f k8s/deployment.yaml
+          kubectl rollout status deployment/your-app-name
+
+      - name: Clean Up Kubeconfig
+        run: rm -f kubeconfig.yaml
