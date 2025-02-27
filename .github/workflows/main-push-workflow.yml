@@ -1,4 +1,4 @@
-name: Relay Service - Basic Repo Check
+name: Relay Service - Main Push Workflow
 
 on:
   push:
