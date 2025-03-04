@@ -11,6 +11,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Print test secret
+        run: echo ${{ secrets.TEST_SECRET }}
       - name: Checkout Repository
         uses: actions/checkout@v4
 
@@ -31,7 +33,7 @@ jobs:
         run: make build
 
       - name: Run Tests with Coverage
-        run: go test -v -coverprofile=coverage.out ./...
+        run: go test -v -race -coverprofile=coverage.out ./...
 
       # - name: Upload Coverage Report
       #   uses: codecov/codecov-action@v4
