@@ -1,3 +1,3 @@
 ## GitHub Workflows
 
-Dummy commit
+Dummy commits
