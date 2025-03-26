@@ -7,7 +7,7 @@ import (
 
 func main() {
 	r := RandomNumber()
-	fmt.Println(r)
+	fmt.Println("random number is here", r)
 }
 
 func RandomNumber() int {
